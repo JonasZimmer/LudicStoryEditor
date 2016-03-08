@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace LudicStoryEditor.NARRATION
+namespace LSE.NARRATION
 {
     /*
      * Narration Basis Klasse N000
@@ -11,8 +11,8 @@ namespace LudicStoryEditor.NARRATION
      */
     public sealed class N000_Structure_Controller
     {
-        private N000_Structure_Controller instance;
-        public N000_Structure_Controller Instance
+        private static N000_Structure_Controller instance;
+        public static N000_Structure_Controller Instance
         {
             get
             {

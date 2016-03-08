@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace LudicStoryEditor.INTERACTION
+namespace LSE.INTERACTION
 {
     /*
      * Abstrakte Superklasse für mögliche Interaktionen

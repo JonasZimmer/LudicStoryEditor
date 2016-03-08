@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace LudicStoryEditor.EVENT
+namespace LSE.EVENT
 {
     /*
      * Event Verwaltungssystem
@@ -12,8 +12,8 @@ namespace LudicStoryEditor.EVENT
      */ 
     public sealed class E000_EventManager
     {
-        private E000_EventManager instance;
-        public E000_EventManager Instance
+        private static E000_EventManager instance;
+        public static E000_EventManager Instance
         {
             get
             {
@@ -24,7 +24,7 @@ namespace LudicStoryEditor.EVENT
         }
 
         // Delegate Funktion zur Registrierung als EventListener 
-        public delegate void EventListener(string command, Object parameter = null);
+        public delegate void EventListener(string command, string parameter = "");
         // Dieses Dictionary enthält eine Liste aller zu einer Event ID registrierten Funktionen
         private Dictionary<string, List<EventListener>> eventList;
 
@@ -34,7 +34,7 @@ namespace LudicStoryEditor.EVENT
         }
 
         // Event Funktion, ruft die Listener Funktionen aus der Liste heraus auf
-        public void Event(string eventId, string command, Object parameter = null)
+        public void Event(string eventId, string command, string parameter = "")
         {
             if (eventList.ContainsKey(eventId))
                 foreach(EventListener e in eventList[eventId])

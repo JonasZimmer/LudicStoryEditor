@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace LudicStoryEditor.IMPORT
+namespace LSE.IMPORT
 {
     public class IMP100_Import : MonoBehaviour
     {

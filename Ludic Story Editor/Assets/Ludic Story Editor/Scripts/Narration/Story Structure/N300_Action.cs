@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace LudicStoryEditor.NARRATION
+namespace LSE.NARRATION
 {
     /*
      * Abstrakte Superklasse für die unterschiedlichen Aktionen 
