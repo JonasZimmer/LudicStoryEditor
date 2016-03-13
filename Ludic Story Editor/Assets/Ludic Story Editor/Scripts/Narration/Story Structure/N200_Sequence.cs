@@ -12,14 +12,11 @@ namespace LSE.NARRATION
     public class N200_Sequence : MonoBehaviour
     {
         List<N300_Action> actions;
+        N300_Action activeAction;
 
         private void Start()
         {
-            //Beispielhafter Aufruf
-            E000_EventManager.Instance.Event(
-                "SEQUENCE",
-                "activate",
-                "Action_001");
+            activeAction = null;
         }
 
         //Event Listener sollen nur verwendet werden, wenn das Objekt aktiv ist
@@ -36,20 +33,68 @@ namespace LSE.NARRATION
         //Der Event Listener zur eventId "SEQUENCE"
         private void SequenceEventListener(string _com, string _param = "")
         {
-            if (_com == "activate")
+            switch (_com)
             {
-                if (_param != "")
-                    GoTo(_param);
+                case "activate":
+                    if (_param != "")
+                        ActivateAction(_param);
+                    break;
+                case "finish":
+                    if (_param != "")
+                        FinishAction(_param);
+                    break;
             }
         }
 
-        private void GoTo(string actionId)
+        private void ActivateAction(N300_Action a)
+        {
+            if (a != null)
+            {
+                if (activeAction != null)
+                    activeAction.Disable();
+                a.Enable();
+                activeAction = a;
+            }
+            else
+                Debug.LogError("N300_Sequence::ActivateAction, Parameter a is null.");
+        }
+
+        private void ActivateAction(string indicatorId)
+        {
+            N300_Action a = FindByID(indicatorId);
+            if (a != null)
+                ActivateAction(a);
+        }
+
+        private N300_Action FindByID(string actionId)
         {
             foreach (N300_Action a in actions)
             {
                 if (a.name == actionId)
+                    return a;
+            }
+            Debug.LogError("N300_Sequence::FindByID, can't find ID " + actionId + " in List.");
+            return null;
+        }
+
+        private void FinishAction(string actionId)
+        {
+            for (int i = 0; i < actions.Count; i++)
+            {
+                if (actions[i].name == actionId)
                 {
-                    a.gameObject.SetActive(true);
+                    // Wenn eine Folge Aktion definiert ist, diese ausführen
+                    if (actions[i].NextActionID != "")
+                    {
+                        ActivateAction(actions[i].NextActionID);
+                        return;
+                    }
+                    // Sonst das nächste Element der Liste ausführen
+                    else if (i+1 < actions.Count)
+                    {
+                        ActivateAction(actions[i + 1]);
+                        return;
+                    }
                 }
             }
         }
