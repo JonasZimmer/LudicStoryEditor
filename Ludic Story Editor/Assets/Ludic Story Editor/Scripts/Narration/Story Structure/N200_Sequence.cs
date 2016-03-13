@@ -9,31 +9,42 @@ namespace LSE.NARRATION
      * Mittleres Hierachieelement der Story Struktur
      * Die Sequenz vereint eine Menge von Aktionen
      */
+    [System.Serializable]
     public class N200_Sequence : MonoBehaviour
     {
-        List<N300_Action> actions;
-        N300_Action activeAction;
+        [SerializeField]
+        private List<N300_Action> actions;
+        /*public List<N300_Action> Actions
+        {
+            get
+            {
+                if (actions == null)
+                    actions = new List<N300_Action>();
+                return actions;
+            }
+        }*/
+        private N300_Action activeAction;
 
         private void Start()
         {
             activeAction = null;
         }
-
+        
         //Event Listener sollen nur verwendet werden, wenn das Objekt aktiv ist
-        public void OnEnable()
+        public void Enable()
         {
             E000_EventManager.Instance.AddEventListener("SEQUENCE", SequenceEventListener);
         }
 
-        public void OnDisable()
+        public void Disable()
         {
             E000_EventManager.Instance.DelEventListener("SEQUENCE", SequenceEventListener);
         }
 
         //Der Event Listener zur eventId "SEQUENCE"
-        private void SequenceEventListener(string _com, string _param = "")
+        private void SequenceEventListener(string _command, string _param = "")
         {
-            switch (_com)
+            switch (_command)
             {
                 case "activate":
                     if (_param != "")

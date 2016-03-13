@@ -6,7 +6,7 @@ namespace LSE.NARRATION
     /*
      * Dialog Klasse 
      */ 
-    public class N301_Dialogue : N300_Action
+    public class N301_Dialog : N300_Action
     {
 
     }
