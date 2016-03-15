@@ -12,6 +12,15 @@ namespace LSE.NARRATION
         public virtual string NextActionID
         {
             get { return nextActionId; }
+            set { nextActionId = value;  }
+        }
+
+        public enum N300_Action_Type { DIALOG, POI, EVENT };
+        protected N300_Action_Type type;
+        public N300_Action_Type Type
+        {
+            get { return type; }
+            set { type = value; }
         }
 
         public virtual void Enable()

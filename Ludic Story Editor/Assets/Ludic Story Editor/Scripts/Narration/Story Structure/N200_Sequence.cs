@@ -14,7 +14,7 @@ namespace LSE.NARRATION
     {
         [SerializeField]
         private List<N300_Action> actions;
-        /*public List<N300_Action> Actions
+        public List<N300_Action> Actions
         {
             get
             {
@@ -22,7 +22,7 @@ namespace LSE.NARRATION
                     actions = new List<N300_Action>();
                 return actions;
             }
-        }*/
+        }
         private N300_Action activeAction;
 
         private void Start()
