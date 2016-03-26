@@ -25,6 +25,13 @@ namespace LSE.NARRATION
         }
         private N300_Action activeAction;
 
+        protected string nextSequenceId = "";
+        public virtual string NextSequenceId
+        {
+            get { return nextSequenceId; }
+            set { nextSequenceId = value; }
+        }
+
         private void Start()
         {
             activeAction = null;
@@ -70,9 +77,9 @@ namespace LSE.NARRATION
                 Debug.LogError("N300_Sequence::ActivateAction, Parameter a is null.");
         }
 
-        private void ActivateAction(string indicatorId)
+        private void ActivateAction(string actionId)
         {
-            N300_Action a = FindByID(indicatorId);
+            N300_Action a = FindByID(actionId);
             if (a != null)
                 ActivateAction(a);
         }
