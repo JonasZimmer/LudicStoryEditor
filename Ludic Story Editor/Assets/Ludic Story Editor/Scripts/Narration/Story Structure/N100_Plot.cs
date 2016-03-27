@@ -53,6 +53,11 @@ namespace LSE.NARRATION
             }
         }
 
+        public void AddSequence (N200_Sequence _s)
+        {
+            Sequences.Add(_s);
+        }
+
         private void ActivateSequence(N200_Sequence s)
         {
             if (s != null)

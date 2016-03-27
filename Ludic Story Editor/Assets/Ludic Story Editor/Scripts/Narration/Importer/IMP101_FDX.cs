@@ -29,12 +29,17 @@ namespace LSE.IMPORT
             importedPlot = new List<IMP200_ImportDataStruct>();
             current = null;
 
-            //path = "file:///" + path;
-
-            Debug.LogError("IMP101::LoadData, try to load from path " + path);
-            StreamReader str = File.OpenText(path);
+            FileStream f = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Inheritable);
+            StreamReader str = new StreamReader(f);
+            //StreamReader str = File.OpenText(path);
             string data = str.ReadToEnd();
-            Debug.LogError("IMP101::LoadData, data loaded: " + data);
+            
+            f.Dispose();
+            str.Dispose();
+            /*
+            int start= data.IndexOf("<Content>");
+            int end = data.IndexOf("</Content>");
+            data = data.Substring(start, end-start+10);/**/
 
             XmlDocument xmlDoc = new XmlDocument();
             xmlDoc.LoadXml(data);
@@ -53,14 +58,14 @@ namespace LSE.IMPORT
                                 current.name = paragraph["Text"].InnerText;
                             else
                                 Debug.LogError("IMP101::LoadData, Scene Heading not containing a <Text> Element");
-                            if (paragraph["SceneArcBeats"] != null)
-                                foreach (XmlNode sceneArcBeat in paragraph["SceneArcBeats"])
+                            if (paragraph["SceneProperties"]["SceneArcBeats"] != null)
+                                foreach (XmlNode sceneArcBeat in paragraph["SceneProperties"]["SceneArcBeats"])
                                 {
                                     string c = sceneArcBeat.Attributes["Name"].Value;
                                     current.characters.Add(c);
                                 }
                             else
-                                Debug.LogError("IMP101::LoadData, Scene Heading not containing a <SceneArcBeats> Attribute");
+                                Debug.LogError("IMP101::LoadData, Scene Heading of " + current.name + " not containing a <SceneArcBeats> Attribute");
                             break;
                         case "Action":
                             if (paragraph["Text"] != null)
@@ -92,6 +97,8 @@ namespace LSE.IMPORT
                             break;
                     }               
             }
+            if (current != null)
+                importedPlot.Add(current);
 
             LSE.NARRATION.N000_Structure_Controller.Instance.Initialisieren(importedPlot, path.Substring(path.LastIndexOf("/")+1));
         }

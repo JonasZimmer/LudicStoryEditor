@@ -15,7 +15,9 @@ namespace LSE.NARRATION
             set { nextActionId = value;  }
         }
 
-        public enum N300_Action_Type { DIALOG, POI, EVENT };
+        public string agent = "NONE";
+
+        public enum N300_Action_Type { DIALOG, POI, EVENT, NOTE };
         protected N300_Action_Type type;
         public N300_Action_Type Type
         {

@@ -11,7 +11,6 @@ public class LSE000_Menu : Editor
 					"Import *.fdx",
 					"",
 					"fdx");
-        Debug.LogError("LSE000::ImportFDXMenu, try to call IMP001_FDX.Instance.LoadData(" + path + ")");
         LSE.IMPORT.IMP001_FDX.Instance.LoadData(path);
     }
 /*

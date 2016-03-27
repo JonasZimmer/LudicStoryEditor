@@ -64,6 +64,11 @@ namespace LSE.NARRATION
             }
         }
 
+        public void AddAction(N300_Action _a)
+        {
+            Actions.Add(_a);
+        }
+
         private void ActivateAction(N300_Action a)
         {
             if (a != null)
