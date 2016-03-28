@@ -5,12 +5,12 @@ using LSE.IMPORT;
 
 namespace LSE.NARRATION
 {
-    /*
-     * Narration Basis Klasse N000
-     * Struktur Controller
-     * Zuständig für Laden/Speichern der Story Struktur
-     * Interpretiert die importierten Daten und konstruiert daraus die Struktur
-     */
+    /// <summary>
+    /// Narration Basis Klasse N000
+    /// Struktur Controller
+    /// Zuständig für Laden/Speichern der Story Struktur
+    /// Interpretiert die importierten Daten und konstruiert daraus die Struktur
+    /// </summary>
     public sealed class N000_Structure_Controller
     {
         private static N000_Structure_Controller instance;

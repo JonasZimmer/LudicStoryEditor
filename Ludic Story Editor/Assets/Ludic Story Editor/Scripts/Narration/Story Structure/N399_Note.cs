@@ -3,9 +3,10 @@ using System.Collections;
 
 namespace LSE.NARRATION
 {
-    /*
-     * Event Aktions Klasse, sendet bei Start ein Event aus
-     */
+    /// <summary>
+    /// Beinhaltet Anmerkungen aus der importierten Drehbuchdatei.
+    /// Beim Aufruf wird einfach zum Folge Element gesprungen.
+    /// </summary>
     public class N399_Note : N300_Action
     {
         public string note;

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 
 namespace LSE.IMPORT
 {
+    /// <summary>
+    /// Datenstruktur zur Vereinheitlichung der importierten Daten und Weiterverarbeitung im N000_Structure_Controller
+    /// </summary>
     public class IMP200_ImportDataStruct
     {
         public string name;

@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace LSE.NARRATION
 {
-    /*
-     * Dialog Klasse 
-     */ 
+    /// <summary>
+    /// Dialogklasse
+    /// </summary>
     public class N301_Dialog : N300_Action
     {
         public string text;

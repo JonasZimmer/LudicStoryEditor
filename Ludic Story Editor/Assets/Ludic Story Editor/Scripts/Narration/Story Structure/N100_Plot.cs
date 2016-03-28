@@ -5,11 +5,11 @@ using LSE.EVENT;
 
 namespace LSE.NARRATION
 {
-    /*
-     * Oberstes Hierachieelement der Story Struktur
-     * Der Plot besteht aus vielen Sequenzen.
-     * Er regelt die Reihenfolge, in der diese abgespielt werden
-     */
+    /// <summary>
+    /// Oberstes Hierachieelement der Story Struktur
+    /// Der Plot besteht aus vielen Sequenzen.
+    /// Er regelt die Reihenfolge, in der diese abgespielt werden
+    /// </summary>
     [System.Serializable]
     public class N100_Plot : MonoBehaviour
     {

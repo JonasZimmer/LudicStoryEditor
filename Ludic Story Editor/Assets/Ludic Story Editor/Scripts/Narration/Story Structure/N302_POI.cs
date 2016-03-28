@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace LSE.NARRATION
 {
-    /*
-     * POI Klasse
-     */
+    /// <summary>
+    /// Point of Interest
+    /// </summary>
     public class N302_POI : N300_Action
     {
 

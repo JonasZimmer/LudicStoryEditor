@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace LSE.NARRATION
 {
-    /*
-     * Abstrakte Superklasse für die unterschiedlichen Aktionen 
-     */
+    /// <summary>
+    /// Abstrakte Superklasse für die unterschiedlichen Aktionen 
+    /// </summary>
     public abstract class N300_Action : MonoBehaviour
     {
         protected string nextActionId = "";
@@ -15,6 +15,7 @@ namespace LSE.NARRATION
             set { nextActionId = value;  }
         }
 
+        public LSE.INTERACTION.I100_Interaction interaction;
         public string agent = "NONE";
 
         public enum N300_Action_Type { DIALOG, POI, EVENT, NOTE };

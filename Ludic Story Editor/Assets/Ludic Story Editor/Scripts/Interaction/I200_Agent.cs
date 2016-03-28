@@ -4,9 +4,9 @@ using System.Collections;
 namespace LSE.INTERACTION
 {
     /// <summary>
-    /// Abstrakte Superklasse für mögliche Interaktionen
+    /// Superklasse für alle agierenden Elemente der Geschichte
     /// </summary>
-    public abstract class I100_Interaction : MonoBehaviour
+    public class I200_Agent : MonoBehaviour
     {
 
     }

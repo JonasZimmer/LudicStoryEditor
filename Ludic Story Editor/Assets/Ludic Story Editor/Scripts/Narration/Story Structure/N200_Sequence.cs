@@ -5,10 +5,10 @@ using LSE.EVENT;
 
 namespace LSE.NARRATION
 {
-    /*
-     * Mittleres Hierachieelement der Story Struktur
-     * Die Sequenz vereint eine Menge von Aktionen
-     */
+    /// <summary>
+    /// Mittleres Hierachieelement der Story Struktur
+    /// Die Sequenz vereint eine Menge von Aktionen
+    /// </summary>
     [System.Serializable]
     public class N200_Sequence : MonoBehaviour
     {

@@ -3,9 +3,9 @@ using System.Collections;
 
 namespace LSE.NARRATION
 {
-    /*
-     * Event Aktions Klasse, sendet bei Start ein Event aus
-     */ 
+    /// <summary>
+    /// Event Aktions Klasse, sendet bei Start ein Event aus
+    /// </summary>
     public class N303_Event : N300_Action
     {
         public enum EventType { PLOT, SEQUENCE, ACTION, DIALOG };
