@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LSE.INTERACTION;
 
 namespace LSE.NARRATION
 {
@@ -15,8 +16,8 @@ namespace LSE.NARRATION
             set { nextActionId = value;  }
         }
 
-        public LSE.INTERACTION.I100_Interaction interaction;
-        public string agent = "NONE";
+        public I100_Interaction interaction;
+        public I200_Agent       agent;
 
         public enum N300_Action_Type { DIALOG, POI, EVENT, NOTE };
         protected N300_Action_Type type;

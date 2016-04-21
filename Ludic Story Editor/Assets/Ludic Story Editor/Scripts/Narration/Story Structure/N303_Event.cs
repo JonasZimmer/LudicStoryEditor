@@ -15,6 +15,8 @@ namespace LSE.NARRATION
         // Soll automatisch zum nächsten Element gegangen werden, oder regelt das das ausgesendete Event?
         public bool finish;
 
+        public N303_Event() { Type = N300_Action_Type.EVENT; }
+
         public override void Enable()
         {
             LSE.EVENT.E000_EventManager.Instance.Event(

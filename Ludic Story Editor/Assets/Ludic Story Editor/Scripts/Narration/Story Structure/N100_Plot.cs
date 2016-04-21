@@ -27,14 +27,9 @@ namespace LSE.NARRATION
         N200_Sequence activeSequence;
 
         //Event Listener sollen nur verwendet werden, wenn das Objekt aktiv ist
-        public void Enable()
+        public void Start()
         {
             E000_EventManager.Instance.AddEventListener("PLOT", PlotEventListener);
-        }
-
-        public void Disable()
-        {
-            E000_EventManager.Instance.DelEventListener("PLOT", PlotEventListener);
         }
 
         //Der Event Listener zur eventId "SEQUENCE"

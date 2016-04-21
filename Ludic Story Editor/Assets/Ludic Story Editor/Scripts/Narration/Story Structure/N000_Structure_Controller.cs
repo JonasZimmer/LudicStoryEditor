@@ -40,8 +40,11 @@ namespace LSE.NARRATION
                 sObj.name = _s.name;
                 N200_Sequence sequence = sObj.AddComponent<N200_Sequence>();
                 plot.AddSequence(sequence);
+                sequence.StageName = _s.name;
+                if (_s.characters.Count > 0)
+                    foreach (string name in _s.characters)
+                        sequence.AddAgent(name);
 
-                //TODO add Characters
                 string agent = "NONE";
                 foreach (IMP200_ImportDataStruct.IMP201_ActionDataStruct _a in _s.actions)
                 {
@@ -76,7 +79,9 @@ namespace LSE.NARRATION
                         N300_Action _action = aObj.GetComponent<N300_Action>();
                         if (_action != null)
                         {
-                            _action.agent = agent;
+                            if (_action.agent == null)
+                                _action.agent = new LSE.INTERACTION.I200_Agent();
+                            _action.agent.Name = agent;
                             sequence.AddAction(_action);
                         }
                     }

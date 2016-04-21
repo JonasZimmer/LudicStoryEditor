@@ -9,5 +9,6 @@ namespace LSE.NARRATION
     public class N301_Dialog : N300_Action
     {
         public string text;
+        public N301_Dialog() { Type = N300_Action_Type.DIALOG; }
     }
 }

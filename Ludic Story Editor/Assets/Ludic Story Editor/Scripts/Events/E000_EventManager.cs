@@ -37,9 +37,12 @@ namespace LSE.EVENT
         public void Event(string eventId, string command, string parameter = "")
         {
             if (eventList.ContainsKey(eventId))
+            {
+                Debug.Log("Event \"" + eventId + "\" fired. Contact " + eventList[eventId].Count + " Listeners.\n" + "(" + eventId +", " + command + ", " + parameter + ")");
                 foreach(EventListener e in eventList[eventId])
                     if (e != null)
                         e(command, parameter);
+            }
         }
 
         // Fügt der Event ID eine neue Listener Funktion hinzu
