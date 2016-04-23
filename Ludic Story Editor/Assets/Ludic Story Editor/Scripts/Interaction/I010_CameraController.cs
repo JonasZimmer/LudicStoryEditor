@@ -5,26 +5,22 @@ namespace LSE.INTERACTION
 {
     public class I010_CameraController : MonoBehaviour
     {
-        private Vector3 _startPos;
-        private Vector3 _lastPos;
+        private Vector3 _startPos, _lastPos;
         // Rahmen der Kamerabewegung
-        private float minX = 0;
-        private float maxX = 1;
-        // Bei falschen oder fehlerhaften Rahmen ist die Kamera unbeweglich
-        private bool isStatic;
+        private float minX, minY = 0;
+        private float maxX, maxY = 1;
 
-        public void Update()
+        //Verstecke das Script
+        [ExecuteInEditMode]
+        protected I010_CameraController()
         {
-            if (!isStatic)
-            {
-                float xAxisValue = Input.GetAxis("Horizontal")/3.0f;
-                if (Camera.current != null)
-                {
-                    transform.Translate(new Vector3(xAxisValue, 0, 0));
-                    CheckBorders();
-                }
-            }
+            gameObject.GetComponent<I010_CameraController>().hideFlags = 
+                HideFlags.HideInInspector;
+        }
 
+        public void LateUpdate()
+        {
+            CheckBorders();
             if (transform.position != _lastPos)
             {
                 _lastPos = transform.position;
@@ -35,10 +31,11 @@ namespace LSE.INTERACTION
         private void CheckBorders()
         {
             Vector3 p = transform.position;
-            if (p.x > maxX)
-                transform.position = new Vector3(maxX, p.y, p.z);
-            else if (p.x < minX)
-                transform.position = new Vector3(minX, p.y, p.z);
+            if (p.x > maxX) p = new Vector3(maxX, p.y, p.z);
+            if (p.x < minX) p = new Vector3(minX, p.y, p.z);
+            if (p.y > maxY) p = new Vector3(p.x, maxY, p.z);
+            if (p.y < minY) p = new Vector3(p.x, minY, p.z);
+            transform.position = p;
         }
 
         private void SendDeltaX()
@@ -68,8 +65,6 @@ namespace LSE.INTERACTION
                 _lastPos = _startPos;
                 minX = values[3];
                 maxX = values[4];
-                if (maxX <= minX) isStatic = true;
-                else isStatic = false;
             }
         }
     }

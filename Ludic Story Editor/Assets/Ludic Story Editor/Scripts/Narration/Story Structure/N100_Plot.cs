@@ -30,6 +30,9 @@ namespace LSE.NARRATION
         public void Start()
         {
             E000_EventManager.Instance.AddEventListener("PLOT", PlotEventListener);
+            //Sicherstellen dass die Hauptkamera ein Kamera Controller Script trägt
+            if (Camera.main.GetComponent<LSE.INTERACTION.I010_CameraController>() == null)
+                Camera.main.gameObject.AddComponent<LSE.INTERACTION.I010_CameraController>();
         }
 
         //Der Event Listener zur eventId "SEQUENCE"
