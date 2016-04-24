@@ -26,13 +26,17 @@ namespace LSE.NARRATION
         }
         N200_Sequence activeSequence;
 
-        //Event Listener sollen nur verwendet werden, wenn das Objekt aktiv ist
-        public void Start()
+        private void Awake()
         {
-            E000_EventManager.Instance.AddEventListener("PLOT", PlotEventListener);
             //Sicherstellen dass die Hauptkamera ein Kamera Controller Script trägt
             if (Camera.main.GetComponent<LSE.INTERACTION.I010_CameraController>() == null)
                 Camera.main.gameObject.AddComponent<LSE.INTERACTION.I010_CameraController>();
+        }
+
+        //Event Listener sollen nur verwendet werden, wenn das Objekt aktiv ist
+        private void Start()
+        {
+            E000_EventManager.Instance.AddEventListener("PLOT", PlotEventListener);
         }
 
         //Der Event Listener zur eventId "SEQUENCE"

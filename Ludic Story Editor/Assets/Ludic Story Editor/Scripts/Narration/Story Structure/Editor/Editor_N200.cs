@@ -63,10 +63,45 @@ namespace LSE.EDITOR
             actionsList.onAddCallback -= AddActionListItem;
             actionsList.onRemoveCallback -= RemoveActionListItem;
         }
+
         public override void OnInspectorGUI()
         {
-            sequence.Stage = (LSE.VISUALIZATION.V300_Stage) EditorGUILayout.ObjectField(
-                sequence.StageName, sequence.Stage, typeof(LSE.VISUALIZATION.V300_Stage), true);
+            sequence.StageAttributes.stage = (LSE.VISUALIZATION.V300_Stage) EditorGUILayout.ObjectField(
+                sequence.StageName, sequence.StageAttributes.stage, typeof(LSE.VISUALIZATION.V300_Stage), true);/**/
+            if (sequence.StageAttributes.stage != null)
+            {
+                EditorGUILayout.BeginVertical();
+                {
+                    sequence.StageAttributes.cameraSettings.startPos =
+                        EditorGUILayout.Vector3Field("Kamera Startposition", sequence.StageAttributes.cameraSettings.startPos);
+                    sequence.StageAttributes.cameraSettings.cType = (INTERACTION.I501_ControllableObject.ControllerType)
+                        EditorGUILayout.EnumPopup("Kamera Bewegungseinstellungen", sequence.StageAttributes.cameraSettings.cType);
+                    if (sequence.StageAttributes.cameraSettings.cType == INTERACTION.I501_ControllableObject.ControllerType.HORIZONTAL ||
+                        sequence.StageAttributes.cameraSettings.cType == INTERACTION.I501_ControllableObject.ControllerType.SPACE)
+                    { 
+                        EditorGUILayout.BeginHorizontal();
+                        sequence.StageAttributes.cameraSettings.leftBorder = EditorGUILayout.FloatField("Linker Kamera Rand", sequence.StageAttributes.cameraSettings.leftBorder);
+                        sequence.StageAttributes.cameraSettings.rightBorder = EditorGUILayout.FloatField("Rechter Kamera Rand", sequence.StageAttributes.cameraSettings.rightBorder);
+                        EditorGUILayout.EndHorizontal();
+                    }
+                    if (sequence.StageAttributes.cameraSettings.cType == INTERACTION.I501_ControllableObject.ControllerType.VERTICAL ||
+                        sequence.StageAttributes.cameraSettings.cType == INTERACTION.I501_ControllableObject.ControllerType.SPACE)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        sequence.StageAttributes.cameraSettings.topBorder = EditorGUILayout.FloatField("Oberer Kamera Rand", sequence.StageAttributes.cameraSettings.topBorder);
+                        sequence.StageAttributes.cameraSettings.lowerBorder = EditorGUILayout.FloatField("Unterer Kamera Rand", sequence.StageAttributes.cameraSettings.lowerBorder);
+                        EditorGUILayout.EndHorizontal();
+                    }
+                    if (sequence.StageAttributes.cameraSettings.cType == INTERACTION.I501_ControllableObject.ControllerType.FOLLOW)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        sequence.StageAttributes.cameraSettings.target = (LSE.VISUALIZATION.V000_Visual)EditorGUILayout.ObjectField(
+                            "Folge dem Objekt: ", sequence.StageAttributes.cameraSettings.target, typeof(LSE.VISUALIZATION.V000_Visual), true);
+                        EditorGUILayout.EndHorizontal();
+                    }
+                }
+                EditorGUILayout.EndVertical();
+            }
 
             EditorGUILayout.PrefixLabel("Agenten:");
             agentList.DoLayoutList();
@@ -84,7 +119,7 @@ namespace LSE.EDITOR
             N200_Sequence.N200_Sequence_AgentStruct a = sequence.Agents[index];
             EditorGUI.BeginChangeCheck();
             a.agent = (LSE.VISUALIZATION.V200_Agent) EditorGUI.ObjectField(
-                new Rect(rect.x, rect.y, rect.width, rect.height - 2), a.agentName, a.agent, typeof(LSE.VISUALIZATION.V200_Agent), true);
+                new Rect(rect.x, rect.y, rect.width, rect.height - 4), a.agentName, a.agent, typeof(LSE.VISUALIZATION.V200_Agent), true);
 
             if (EditorGUI.EndChangeCheck())
             {

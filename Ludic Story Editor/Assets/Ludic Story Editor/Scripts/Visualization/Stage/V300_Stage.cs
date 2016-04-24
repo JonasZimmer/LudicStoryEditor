@@ -14,9 +14,10 @@ namespace LSE.VISUALIZATION
         [System.Serializable]
         public class V301_CameraSettings
         {
-            public Vector3  startPos;
-            public float    leftBorder;
-            public float    rightBorder;
+            public Vector3 startPos = new Vector3(0,0,-10);
+            public LSE.INTERACTION.I501_ControllableObject.ControllerType cType;
+            public float leftBorder, rightBorder, topBorder, lowerBorder;
+            public V000_Visual target;
             /// <summary>
             /// Formatiert die Kameraeinstellungen um sie als Parameter
             /// für das initialisierende Event zu nutzen
@@ -29,12 +30,13 @@ namespace LSE.VISUALIZATION
                 result += startPos.y.ToString("G4") + ";";
                 result += startPos.z.ToString("G4") + ";";
                 result += leftBorder.ToString("G4") + ";";
-                result += rightBorder.ToString("G4");
-                return result; 
+                result += rightBorder.ToString("G4") + ";";
+                result += topBorder.ToString("G4") + ";";
+                result += lowerBorder.ToString("G4") + ";";
+                result += cType.ToString();
+                return result;
             }
         }
-        [SerializeField]
-        private V301_CameraSettings cameraSetting;
 
         [SerializeField]
         private List<V310_Background> backgrounds;
@@ -73,12 +75,7 @@ namespace LSE.VISUALIZATION
         {
             E000_EventManager.Instance.DelEventListener("CAMERA", CameraEventListener);
         }
-
-        private void Start()
-        {
-            E000_EventManager.Instance.Event("CAMERA", "Init", cameraSetting.ToString());
-        }
-
+        
         private void CameraEventListener(string _command, string _param = "")
         {
             if (_command == "Move")

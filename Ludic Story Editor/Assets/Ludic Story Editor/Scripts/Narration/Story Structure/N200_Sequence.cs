@@ -25,12 +25,19 @@ namespace LSE.NARRATION
             get { return stageName; }
             set { stageName = value; }
         }
-        [SerializeField]
-        private LSE.VISUALIZATION.V300_Stage stage;
-        public LSE.VISUALIZATION.V300_Stage Stage
+
+        [System.Serializable]
+        public class N200_Sequence_StageAttributes
         {
-            get { return stage; }
-            set { stage = value; }
+            public LSE.VISUALIZATION.V300_Stage stage;
+            public LSE.VISUALIZATION.V300_Stage.V301_CameraSettings cameraSettings;
+        }
+        [SerializeField]
+        private N200_Sequence_StageAttributes stageAttributes;
+        public N200_Sequence_StageAttributes StageAttributes
+        {
+            get { return stageAttributes; }
+            set { stageAttributes = value; }
         }
 
         /// <summary>
@@ -39,6 +46,7 @@ namespace LSE.NARRATION
         /// Liste verknüpft den Bezeichner mit einer reellen
         /// Visualisierung eines Agenten.
         /// </summary>
+        [System.Serializable]
         public class N200_Sequence_AgentStruct
         {
             public string agentName;
@@ -94,6 +102,7 @@ namespace LSE.NARRATION
         private void Start()
         {
             activeAction = null;
+            E000_EventManager.Instance.Event("CAMERA", "Init", StageAttributes.cameraSettings.ToString());
         }
         
         /// <summary>

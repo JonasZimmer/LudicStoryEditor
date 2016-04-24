@@ -7,11 +7,8 @@ namespace LSE.VISUALIZATION
     /// <summary>
     /// Basisklasse eines visuellen Objektes in der Szene
     /// </summary>
-    public class V100_VisualObject : MonoBehaviour
+    public class V100_VisualObject : V000_Visual
     {
-        //TODO: Add 3D visuals?
-        [SerializeField]
-        protected Sprite _s;
         [SerializeField]
         protected Vector3 startPosition;
         protected Vector3 curPosition;

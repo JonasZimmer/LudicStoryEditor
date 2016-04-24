@@ -3,6 +3,7 @@ using System.Collections;
 
 namespace LSE.INTERACTION
 {
+    [HideInInspector]
     public class I010_CameraController : MonoBehaviour
     {
         private Vector3 _startPos, _lastPos;
@@ -11,12 +12,12 @@ namespace LSE.INTERACTION
         private float maxX, maxY = 1;
 
         //Verstecke das Script
-        [ExecuteInEditMode]
+       /* [ExecuteInEditMode]
         protected I010_CameraController()
         {
             gameObject.GetComponent<I010_CameraController>().hideFlags = 
                 HideFlags.HideInInspector;
-        }
+        }*/
 
         public void LateUpdate()
         {
@@ -59,12 +60,18 @@ namespace LSE.INTERACTION
             {
                 string[] param = _param.Split(';');
                 float[] values = new float[param.Length];
-                for (int i = 0; i < param.Length; i++) values[i] = float.Parse(param[i]);
+                for (int i = 0; i < param.Length; i++) if (!float.TryParse(param[i], out values[i])) values[i] = 0;
                 _startPos = new Vector3(values[0], values[1], values[2]);
                 transform.position = _startPos;
                 _lastPos = _startPos;
                 minX = values[3];
                 maxX = values[4];
+                minY = values[5];
+                maxY = values[6];
+                I501_ControllableObject i501 = gameObject.GetComponent<I501_ControllableObject>();
+                if (i501 == null)
+                    i501 = gameObject.AddComponent<I501_ControllableObject>();
+                i501.CType = (I501_ControllableObject.ControllerType) I501_ControllableObject.ControllerType.Parse(typeof(I501_ControllableObject.ControllerType), param[7]);
             }
         }
     }

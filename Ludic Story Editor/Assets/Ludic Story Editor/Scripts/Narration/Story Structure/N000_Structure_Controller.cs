@@ -32,6 +32,7 @@ namespace LSE.NARRATION
                 plot.name = _name;
             else
                 plot.name = "Plot";
+            plot.transform.parent = LSE100_LSEController.Instance.LSEParent;
 
             foreach (IMP200_ImportDataStruct _s in data)
             {
@@ -84,8 +85,10 @@ namespace LSE.NARRATION
                             _action.agent.Name = agent;
                             sequence.AddAction(_action);
                         }
+                        aObj.SetActive(false);
                     }
                 }
+                sObj.SetActive(false);
             }
         }
 
