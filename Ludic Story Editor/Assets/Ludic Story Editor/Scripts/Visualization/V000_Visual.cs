@@ -10,13 +10,13 @@ namespace LSE.VISUALIZATION
 
     public class V000_Visual : MonoBehaviour
     {
-        protected V000_Visual()
+        /*protected V000_Visual()
         {
             if (sortOrdMax != sortOrdMin)
                 SortingOrder = sortOrdMax / 2;
             else
                 SortingOrder = sortOrdMax;
-        }
+        }*/
 
         //TODO: Add 3D visuals?
         [SerializeField]

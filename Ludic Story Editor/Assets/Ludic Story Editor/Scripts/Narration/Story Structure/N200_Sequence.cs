@@ -226,9 +226,11 @@ namespace LSE.NARRATION
         /// <param name="flag"></param>
         private void HandleVisibility(bool flag)
         {
-            StageAttributes.stage.gameObject.SetActive(flag);
+            if (StageAttributes.stage != null)
+                StageAttributes.stage.gameObject.SetActive(flag);
             foreach (N200_Sequence_AgentStruct a in agents)
-                a.agent.gameObject.SetActive(flag);
+                if (a != null)
+                    a.agent.gameObject.SetActive(flag);
         }
     }
 }
