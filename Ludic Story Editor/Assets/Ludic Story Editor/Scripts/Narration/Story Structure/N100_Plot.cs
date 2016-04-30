@@ -37,6 +37,7 @@ namespace LSE.NARRATION
         private void Start()
         {
             E000_EventManager.Instance.AddEventListener("PLOT", PlotEventListener);
+            ActivateSequence(sequences[0]);
         }
 
         //Der Event Listener zur eventId "SEQUENCE"

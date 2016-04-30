@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LSE.VISUALIZATION;
 
 namespace LSE.INTERACTION
 {
@@ -72,7 +73,19 @@ namespace LSE.INTERACTION
                 if (i501 == null)
                     i501 = gameObject.AddComponent<I501_ControllableObject>();
                 i501.CType = (I501_ControllableObject.ControllerType) I501_ControllableObject.ControllerType.Parse(typeof(I501_ControllableObject.ControllerType), param[7]);
+                if (i501.GetComponent<I513_FollowControl>() != null && param[8] != "0")
+                    i501.GetComponent<I513_FollowControl>().Target =
+                        ObjectIDToVisual((int) values[8]);
             }
+        }
+
+        private V000_Visual ObjectIDToVisual(int _instanceID)
+        {
+            V000_Visual v = null;
+            V000_Visual[] visuals = FindObjectsOfType(typeof(V000_Visual)) as V000_Visual[];
+            foreach (V000_Visual _v in visuals)
+                if (_v.GetInstanceID() == _instanceID) { return _v; }
+            return v;
         }
     }
 }

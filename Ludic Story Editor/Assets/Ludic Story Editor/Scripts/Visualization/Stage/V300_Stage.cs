@@ -33,7 +33,9 @@ namespace LSE.VISUALIZATION
                 result += rightBorder.ToString("G4") + ";";
                 result += topBorder.ToString("G4") + ";";
                 result += lowerBorder.ToString("G4") + ";";
-                result += cType.ToString();
+                result += cType.ToString() + ";";
+                if (target == null) result += "0";
+                else result += target.GetInstanceID();
                 return result;
             }
         }
@@ -64,6 +66,11 @@ namespace LSE.VISUALIZATION
 
         [SerializeField]
         protected bool useParallexScrolling;
+        public bool UseParallexScrolling
+        {
+            get { return useParallexScrolling; }
+            set { useParallexScrolling = value; }
+        }
         
         private void OnEnable()
         {
@@ -89,6 +96,32 @@ namespace LSE.VISUALIZATION
                         o.Move(deltaX);
                 }
             }
+        }
+
+        public void AddBackground()
+        {
+            GameObject obj = new GameObject();
+            obj.name = "Background_" + Backgrounds.Count.ToString("D3");
+            obj.transform.parent = transform;
+            Backgrounds.Add(obj.AddComponent<V310_Background>());
+        }
+
+        public void AddSceneobject()
+        {
+            GameObject obj = new GameObject();
+            obj.name = "Foreground_" + SceneObjects.Count.ToString("D3");
+            obj.transform.parent = transform;
+            SceneObjects.Add(obj.AddComponent<V320_Object>());
+        }
+
+        public void RemoveBackground(int index)
+        {
+            Backgrounds.RemoveAt(index);
+        }
+
+        public void RemoveSceneobject(int index)
+        {
+            SceneObjects.RemoveAt(index);
         }
     }
 }

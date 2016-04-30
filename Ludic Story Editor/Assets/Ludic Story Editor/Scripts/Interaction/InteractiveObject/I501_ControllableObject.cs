@@ -17,10 +17,10 @@ namespace LSE.INTERACTION
             get { return cType; }
             set 
             { 
-                if (cType == value) return;  
-                cType = value;
+                if (cType == value) return;
+                cType = selectedTypeInInspector = value;
                 SetComponents();
-                //Debug.LogError("type set to " + value); 
+                Debug.LogError("type set to " + cType); 
             }
         }
 
@@ -30,6 +30,7 @@ namespace LSE.INTERACTION
             switch(cType)
             {
                 case ControllerType.FOLLOW:
+                    gameObject.AddComponent<I513_FollowControl>();                    
                     break;
                 case ControllerType.HORIZONTAL:
                     gameObject.AddComponent<I511_HorizontalControl>();
@@ -54,6 +55,7 @@ namespace LSE.INTERACTION
         {
             RemoveComponent("I511_HorizontalControl");
             RemoveComponent("I512_VerticalControl");
+            RemoveComponent("I513_FollowControl");
         }
 
         private void RemoveComponent(string c)

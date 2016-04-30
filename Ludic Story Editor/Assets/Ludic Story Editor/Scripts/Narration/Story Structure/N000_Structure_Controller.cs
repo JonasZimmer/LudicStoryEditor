@@ -32,7 +32,7 @@ namespace LSE.NARRATION
                 plot.name = _name;
             else
                 plot.name = "Plot";
-            plot.transform.parent = LSE100_LSEController.Instance.LSEParent;
+            plot.transform.parent = LSE100_LSEController.Instance.StoryParent;
 
             foreach (IMP200_ImportDataStruct _s in data)
             {

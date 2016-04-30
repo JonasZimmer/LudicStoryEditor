@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Collections;
+using LSE;
 
 public class LSE000_Menu : Editor
 {
@@ -13,23 +14,23 @@ public class LSE000_Menu : Editor
 					"fdx");
         LSE.IMPORT.IMP001_FDX.Instance.LoadData(path);
     }
+
+    [MenuItem("Ludic Story Editor/Character/Create New Character", false, 21)]
+    public static void AddCharacter()
+    {
+        GameObject[] selected = new GameObject[1];
+        selected[0] = LSE100_LSEController.Instance.NewCharacter();
+        Selection.objects = selected;
+    }
+
+    [MenuItem("Ludic Story Editor/Stage/Create New Stage", false, 31)]
+    public static void AddStage()
+    {
+        GameObject[] selected = new GameObject[1];
+        selected[0] = LSE100_LSEController.Instance.NewStage();
+        Selection.objects = selected;
+    }
 /*
-    [MenuItem("Story Editor/Create/Create New Chapter", false, 12)]
-    public static void AddChapterMenu()
-    {
-        GameObject[] selected = new GameObject[1];
-        selected[0] = StoryEditorController.Instance.StoryObject.AddChapter();
-        Selection.objects = selected;
-    }
-
-    [MenuItem("Story Editor/Create/Create New Character", false, 13)]
-    public static void AddCharacterMenu()
-    {
-        GameObject[] selected = new GameObject[1];
-        selected[0] = StoryEditorController.Instance.CharacterCreatorObject.AddCharacter();
-        Selection.objects = selected;
-    }
-
     [MenuItem("Story Editor/Create/Create New Dialog", false, 14)]
     public static void AddDialogMenu()
     {

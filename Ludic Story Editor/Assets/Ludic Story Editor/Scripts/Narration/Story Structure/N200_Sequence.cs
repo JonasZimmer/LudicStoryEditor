@@ -103,6 +103,7 @@ namespace LSE.NARRATION
         {
             activeAction = null;
             E000_EventManager.Instance.Event("CAMERA", "Init", StageAttributes.cameraSettings.ToString());
+            ActivateAction(actions[0]);
         }
         
         /// <summary>
@@ -111,11 +112,13 @@ namespace LSE.NARRATION
         public void Enable()
         {
             E000_EventManager.Instance.AddEventListener("SEQUENCE", SequenceEventListener);
+            HandleVisibility(true);
         }
 
         public void Disable()
         {
             E000_EventManager.Instance.DelEventListener("SEQUENCE", SequenceEventListener);
+            HandleVisibility(false);
         }
 
         /// <summary>
@@ -215,6 +218,17 @@ namespace LSE.NARRATION
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Aktiviert/Deaktiviert die Squenzrelevanten 
+        /// </summary>
+        /// <param name="flag"></param>
+        private void HandleVisibility(bool flag)
+        {
+            StageAttributes.stage.gameObject.SetActive(flag);
+            foreach (N200_Sequence_AgentStruct a in agents)
+                a.agent.gameObject.SetActive(flag);
         }
     }
 }

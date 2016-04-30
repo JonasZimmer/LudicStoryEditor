@@ -16,5 +16,7 @@ namespace LSE.INTERACTION
         }
 
         private LSE.VISUALIZATION.V200_Agent visual;
+        [SerializeField]
+        public LSE.INTERACTION.I501_ControllableObject.ControllerType cType;
     }
 }

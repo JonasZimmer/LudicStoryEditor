@@ -11,13 +11,20 @@ namespace LSE.VISUALIZATION
     {
         [SerializeField]
         protected Vector3 startPosition;
+        public Vector3 StartPostion
+        {
+            get { return startPosition; }
+            set
+            {
+                startPosition = value;
+                transform.position = startPosition;
+            }
+        }
         protected Vector3 curPosition;
         public    Vector3 Position
         {
             get { return curPosition; }
         }
-        [SerializeField]
-        protected float parallexScrollingFactor;
 
         protected void Start()
         {

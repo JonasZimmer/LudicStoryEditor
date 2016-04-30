@@ -8,6 +8,10 @@ namespace LSE.VISUALIZATION
     /// </summary>
     public class V320_Object : V100_VisualObject
     {
-
+        private V320_Object()
+        {
+            sortOrdMin = 200;
+            sortOrdMax = 300;
+        }
     }
 }
