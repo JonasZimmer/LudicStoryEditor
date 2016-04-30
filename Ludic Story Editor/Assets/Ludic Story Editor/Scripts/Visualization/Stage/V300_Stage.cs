@@ -65,7 +65,7 @@ namespace LSE.VISUALIZATION
         }
 
         [SerializeField]
-        protected bool useParallexScrolling;
+        protected bool useParallexScrolling = true;
         public bool UseParallexScrolling
         {
             get { return useParallexScrolling; }
@@ -98,19 +98,26 @@ namespace LSE.VISUALIZATION
             }
         }
 
-        public void AddBackground()
+        private GameObject CreateNewObject(string _name, Transform _parent = null)
         {
             GameObject obj = new GameObject();
-            obj.name = "Background_" + Backgrounds.Count.ToString("D3");
-            obj.transform.parent = transform;
+            if (_parent != null)
+                obj.transform.parent = _parent;
+            obj.name = _name;
+            obj.transform.position = Vector3.zero;
+            obj.transform.localScale = Vector3.one;
+            return obj;
+        }
+
+        public void AddBackground()
+        {
+            GameObject obj = CreateNewObject("Background_" + Backgrounds.Count.ToString("D3"), transform);
             Backgrounds.Add(obj.AddComponent<V310_Background>());
         }
 
         public void AddSceneobject()
         {
-            GameObject obj = new GameObject();
-            obj.name = "Foreground_" + SceneObjects.Count.ToString("D3");
-            obj.transform.parent = transform;
+            GameObject obj = CreateNewObject("Foreground_" + SceneObjects.Count.ToString("D3"), transform);
             SceneObjects.Add(obj.AddComponent<V320_Object>());
         }
 

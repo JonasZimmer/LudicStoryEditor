@@ -56,6 +56,7 @@ namespace LSE.VISUALIZATION
         {
             get 
             {
+                return null;
                 if (canvas == null)
                 {
                     canvas = gameObject.GetComponent<Canvas>();
@@ -68,12 +69,15 @@ namespace LSE.VISUALIZATION
             }
         }
 
+        [SerializeField]//[HideInInspector]
+        private int sortingOrder;
         public int SortingOrder
         {
-            get { return _Canvas.sortingOrder; }
+            get { return sortingOrder; } // _Canvas.sortingOrder; }
             set 
             { 
-                _Canvas.sortingOrder = value;
+                sortingOrder = value;
+                //_Canvas.sortingOrder = sortingOrder;
                 CalcParallexScrollingFactor();
             }
         }

@@ -16,7 +16,7 @@ namespace LSE.VISUALIZATION
 
         protected override void CalcParallexScrollingFactor()
         {
-            parallexScrollingFactor = ((float)SortingOrder / (float)sortOrdMax)-1;
+            parallexScrollingFactor = -((float)SortingOrder / (float)sortOrdMax);
         }
     }
 }

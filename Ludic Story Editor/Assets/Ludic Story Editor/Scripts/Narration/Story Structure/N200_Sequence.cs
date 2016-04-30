@@ -229,7 +229,7 @@ namespace LSE.NARRATION
             if (StageAttributes.stage != null)
                 StageAttributes.stage.gameObject.SetActive(flag);
             foreach (N200_Sequence_AgentStruct a in agents)
-                if (a != null)
+                if (a.agent != null)
                     a.agent.gameObject.SetActive(flag);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace LSE
 {
@@ -35,16 +36,30 @@ namespace LSE
             get { if (agentParent == null) GetParent("LSE.Agents", out agentParent); return agentParent.transform; }
         }
 
+        private GameObject CreateNewObject(string _name, Transform _parent = null)
+        {
+            GameObject obj = new GameObject();
+            if (_parent != null)
+                obj.transform.parent = _parent;
+            obj.name = _name;
+            obj.transform.position   = Vector3.zero;
+            obj.transform.localScale = Vector3.one;
+            return obj;
+        }
+
         private void GetLSEParent()
         {
             lseParent = GameObject.Find("LSE");
             if (lseParent == null)
             {
-                lseParent = new GameObject();
-                lseParent.name = "LSE";
+                lseParent = CreateNewObject("LSE");
                 Canvas c = 
                     lseParent.AddComponent<Canvas>();
                 c.renderMode = RenderMode.ScreenSpaceOverlay;
+               /* CanvasScaler cs =
+                    lseParent.AddComponent<CanvasScaler>();
+                cs.uiScaleMode = 
+                    CanvasScaler.ScaleMode.ScaleWithScreenSize;*/
             }
         }
 
@@ -53,10 +68,7 @@ namespace LSE
             Transform _parent = LSEParent.FindChild(name);
             if (_parent == null)
             {
-                obj = new GameObject();
-                obj.name = name;
-                obj.transform.parent = LSEParent;
-                obj.transform.position = Vector3.zero;
+                obj = CreateNewObject(name, LSEParent);
             }
             else
                 obj = _parent.gameObject;
@@ -64,19 +76,15 @@ namespace LSE
 
         public GameObject NewCharacter()
         {
-            GameObject character = new GameObject();
+            GameObject character = CreateNewObject("Neuer Charakter", AgentParent);
             character.AddComponent<LSE.VISUALIZATION.V200_Agent>();
-            character.transform.parent = AgentParent;
-            character.name = "Neuer Charakter";
             return character;
         }
 
         public GameObject NewStage()
         {
-            GameObject stage = new GameObject();
+            GameObject stage = CreateNewObject("Neue Bühne", StageParent);
             stage.AddComponent<LSE.VISUALIZATION.V300_Stage>();
-            stage.transform.parent = StageParent;
-            stage.name = "Neue Bühne";
             return stage;
         }
     }
